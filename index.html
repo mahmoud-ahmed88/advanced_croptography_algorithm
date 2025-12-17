@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CipherX - Cryptography Suite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <aside class="sidebar">
+        <div class="logo">
+          <span class="logo-icon">&#9670;</span>
+          <h1>CipherX</h1>
+        </div>
+        <nav class="nav-menu">
+          <button class="nav-item active" data-algorithm="aes">
+            <span class="nav-icon">&#128274;</span>
+            <span class="nav-label">AES-128</span>
+          </button>
+          <button class="nav-item" data-algorithm="rsa">
+            <span class="nav-icon">&#128273;</span>
+            <span class="nav-label">RSA</span>
+          </button>
+          <button class="nav-item" data-algorithm="des">
+            <span class="nav-icon">&#128272;</span>
+            <span class="nav-label">DES</span>
+          </button>
+          <button class="nav-item" data-algorithm="playfair">
+            <span class="nav-icon">&#9638;</span>
+            <span class="nav-label">Playfair</span>
+          </button>
+          <button class="nav-item" data-algorithm="hill">
+            <span class="nav-icon">&#9635;</span>
+            <span class="nav-label">Hill</span>
+          </button>
+        </nav>
+        <div class="sidebar-footer">
+          <p class="version">v1.0.0</p>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="workspace-header">
+          <h2 class="algorithm-title">AES-128 Encryption</h2>
+          <p class="algorithm-desc">
+            Advanced Encryption Standard with 128-bit key
+          </p>
+        </header>
+
+        <div class="workspace-content">
+          <div class="panel input-panel">
+            <div class="panel-header">
+              <h3>Input</h3>
+            </div>
+            <div class="panel-body">
+              <div class="key-section" id="key-section">
+                <label class="input-label">Secret Key</label>
+                <input
+                  type="text"
+                  id="cipher-key"
+                  class="text-input"
+                  placeholder="Enter encryption key..."
+                />
+                <span class="key-hint" id="key-hint"
+                  >16 characters required</span
+                >
+              </div>
+
+              <div class="rsa-section" id="rsa-section" style="display: none">
+                <div class="rsa-inputs">
+                  <div class="rsa-field">
+                    <label class="input-label">Prime P</label>
+                    <input
+                      type="number"
+                      id="rsa-p"
+                      class="text-input"
+                      placeholder="e.g., 61"
+                    />
+                  </div>
+                  <div class="rsa-field">
+                    <label class="input-label">Prime Q</label>
+                    <input
+                      type="number"
+                      id="rsa-q"
+                      class="text-input"
+                      placeholder="e.g., 53"
+                    />
+                  </div>
+                  <div class="rsa-field">
+                    <label class="input-label">Exponent E</label>
+                    <input
+                      type="number"
+                      id="rsa-e"
+                      class="text-input"
+                      placeholder="e.g., 65537"
+                    />
+                  </div>
+                </div>
+                <span class="key-hint"
+                  >Enter two prime numbers and public exponent</span
+                >
+              </div>
+
+              <div
+                class="matrix-section"
+                id="matrix-section"
+                style="display: none"
+              >
+                <div
+                  class="matrix-size-selector"
+                  id="matrix-size-selector"
+                  style="display: none"
+                >
+                  <label class="input-label">Matrix Size</label>
+                  <select id="hill-size" class="size-dropdown">
+                    <option value="2">2x2 Matrix</option>
+                    <option value="3" selected>3x3 Matrix</option>
+                  </select>
+                </div>
+                <label class="input-label">Key Matrix</label>
+                <div class="matrix-grid" id="matrix-grid"></div>
+              </div>
+
+              <div class="text-section">
+                <label class="input-label">Message</label>
+                <textarea
+                  id="input-text"
+                  class="text-area"
+                  placeholder="Enter your message here..."
+                ></textarea>
+              </div>
+
+              <div class="action-buttons">
+                <button class="btn btn-encrypt" id="btn-encrypt">
+                  <span class="btn-icon">&#9650;</span>
+                  Encrypt
+                </button>
+                <button class="btn btn-decrypt" id="btn-decrypt">
+                  <span class="btn-icon">&#9660;</span>
+                  Decrypt
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel output-panel">
+            <div class="panel-header">
+              <h3>Output</h3>
+              <button class="copy-btn" id="copy-btn" title="Copy to clipboard">
+                <span>&#128203;</span>
+              </button>
+            </div>
+            <div class="panel-body">
+              <div
+                class="output-matrix-section"
+                id="output-matrix-section"
+                style="display: none"
+              >
+                <label class="input-label">Visual Matrix</label>
+                <div class="visual-matrix" id="visual-matrix"></div>
+              </div>
+              <textarea
+                id="output-text"
+                class="text-area output-area"
+                readonly
+                placeholder="Encrypted/Decrypted result will appear here..."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
